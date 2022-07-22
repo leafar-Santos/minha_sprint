@@ -67,9 +67,7 @@ public class CenárioService {
 	}
 
 	public List<Cenario> encontraTodos() {
-		
 		return cenarioRepository.findAll();
-		
 		
 	}
 

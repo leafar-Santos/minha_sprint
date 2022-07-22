@@ -11,6 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 
 
@@ -23,9 +28,19 @@ public class Sprint implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotEmpty(message = "O campo Títilo é obrigatório")
+	@Length(min = 3, max = 20, message = "O campo Título deve ter entre 3 e 20 caracteres.")
 	private String titulo;
+	
+	@NotNull(message = "O campo dataInicio é obrigatório")
+	//@Future(message = "A data de início da Sprint deve ser maior ou igual a data atual")
 	private Date dataInicio;
+	
+	@NotNull(message = "O campo dataFim é obrigatório")
+	//@Future(message = "A data de término da Sprint deve ser maior ou igual a data atual")
 	private Date dataFim;
+	
+	@Length(min = 3, max = 200, message = "O campo Título deve ter entre 3 e 200 caracteres.")
 	private String descricao;
 	
 	//Uma sprint pode ter uma ou mais histórias

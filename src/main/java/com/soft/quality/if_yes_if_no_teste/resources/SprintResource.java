@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,6 +45,7 @@ public class SprintResource {
 		return ResponseEntity.ok().body(sprintDTO);
 	}
 	
+	
 	//Retorna Apenas as sprints sem os dados das histórias
 	@GetMapping
 	public ResponseEntity<List<SprintDTO>>findAll(){
@@ -53,7 +56,7 @@ public class SprintResource {
 	
 	//Método para criar Sprint
 	@PostMapping
-	public ResponseEntity<Sprint>create(@RequestBody Sprint obj){
+	public ResponseEntity<Sprint>create(@Valid @RequestBody Sprint obj){
 		obj = sprintService.criaSprint(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);
@@ -61,9 +64,11 @@ public class SprintResource {
 	
 	//Atualza a Sprint
 	@PutMapping(value ="/{id}")
-	public ResponseEntity<Sprint>update(@PathVariable Integer id, @RequestBody Sprint obj){
-		Sprint newObj = sprintService.atualizaSprint(id, obj);
-		return ResponseEntity.ok().body(newObj);
+	public ResponseEntity<Sprint>update(@Valid @PathVariable Integer id, @RequestBody SprintDTO obj){
+		sprintService.atualizaSprint(id, obj);
+		return ResponseEntity.ok().build();
+		//Sprint newObj = sprintService.atualizaSprint(id, obj);
+		//return ResponseEntity.ok().body(newObj);
 	}
 	
 	//Deleta a Sprint

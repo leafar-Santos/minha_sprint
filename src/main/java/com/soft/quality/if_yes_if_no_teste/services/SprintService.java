@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.soft.quality.if_yes_if_no_teste.domais.Sprint;
+import com.soft.quality.if_yes_if_no_teste.dtos.SprintDTO;
 import com.soft.quality.if_yes_if_no_teste.repositories.SprintRepository;
 import com.soft.quality.if_yes_if_no_teste.services.exceptions.DadosIntegrityViolationException;
 import com.soft.quality.if_yes_if_no_teste.services.exceptions.ObjectNotFoundException;
@@ -32,7 +33,7 @@ public class SprintService {
 	return sprintRepository.save(obj);	
 	}
 
-	public Sprint atualizaSprint(Integer id, Sprint obj) {		
+	public Sprint atualizaSprint(Integer id, SprintDTO obj) {		
 		Sprint newObj = encontraSprintPorId(id);
 		
 		newObj.setTitulo(obj.getTitulo());

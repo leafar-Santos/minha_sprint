@@ -54,7 +54,6 @@ public class IfYesIfNoTesteApplication implements CommandLineRunner {
 		Historia historia3 = new Historia(null, "Definir as regras de negócio do sistema e das novas funcionalidades", sprint3);
 		sprint3.setHistoria(Arrays.asList(historia3));
 		
-		
 		Criterio criterio1 = new Criterio(null, "Deve Acessar a tela de Login", historia1);
 		historia1.setCriterioAceite(Arrays.asList(criterio1));
 		
@@ -62,6 +61,7 @@ public class IfYesIfNoTesteApplication implements CommandLineRunner {
 		historia1.setCriterioAceite(Arrays.asList(criterio2));
 		
 		Criterio criterio3 = new Criterio(null, "Deve Acessar a tela de Login", historia3);
+		
 		historia1.setCriterioAceite(Arrays.asList(criterio3));
 
 		Cenario cenario1 = new Cenario(null, criterio1, "Acessar Tela login", "Não há precondições",

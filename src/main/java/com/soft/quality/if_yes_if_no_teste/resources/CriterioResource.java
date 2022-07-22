@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,7 +58,7 @@ public class CriterioResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Criterio> create(@RequestParam(value = "historia", defaultValue = "0")Integer id_historia,@RequestBody Criterio obj){
+	public ResponseEntity<Criterio> create(@RequestParam(value = "historia", defaultValue = "0")Integer id_historia,@Valid @RequestBody Criterio obj){
 		Criterio newObj = criterioService.criaCriterioComHIstoria(id_historia, obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(newObj);
@@ -64,7 +66,7 @@ public class CriterioResource {
 	
 	// Atualiza O criterio
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Criterio>atualizaCriterio(@PathVariable Integer id, @RequestBody Criterio obj){
+	public ResponseEntity<Criterio>atualizaCriterio(@PathVariable Integer id, @Valid @RequestBody Criterio obj){
 		Criterio newObj = criterioService.atualizaCriterio(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}

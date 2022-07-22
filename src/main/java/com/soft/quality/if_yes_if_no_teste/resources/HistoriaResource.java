@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,7 +56,7 @@ public class HistoriaResource {
 
 	// Cria Histórias
 	@PostMapping
-	public ResponseEntity<Historia> create(@RequestParam(value = "sprint", defaultValue = "0") Integer id_sprint, @RequestBody Historia obj) {
+	public ResponseEntity<Historia> create(@RequestParam(value = "sprint", defaultValue = "0") Integer id_sprint,@Valid @RequestBody Historia obj) {
 		Historia newObj = historiaService.criaHistoriaComCategoria(id_sprint,obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(newObj);
@@ -63,7 +65,7 @@ public class HistoriaResource {
 	
 	// Atualiza a história
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Historia>atualizaHistoria(@PathVariable Integer id, @RequestBody Historia obj){
+	public ResponseEntity<Historia>atualizaHistoria(@PathVariable Integer id,@Valid @RequestBody Historia obj){
 		Historia newObj = historiaService.atualizaHistoria(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}

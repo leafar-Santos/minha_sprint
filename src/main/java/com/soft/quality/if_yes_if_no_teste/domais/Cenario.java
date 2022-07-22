@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.soft.quality.if_yes_if_no_teste.enums.ResultadoTeste;
@@ -30,10 +33,13 @@ public class Cenario implements Serializable{
 	@JoinColumn(name = "criterio_id")
 	private Criterio criterioAceite;
 	
+	@NotEmpty(message ="O campo cenario de teste é obrigatório")
+	@Length(message = "O campo cenário de teste não pode ser vazio. ", min = 1, max = 1000)
 	private String cenarioTeste;
 	private String preCondicoes;
 	private String massaDados;
 	private String criteriosEspeciais;
+	
 	private String ambienteTeste;
 	private String ResultadoObtido;
 	

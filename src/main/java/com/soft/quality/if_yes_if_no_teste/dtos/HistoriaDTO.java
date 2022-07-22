@@ -2,6 +2,10 @@ package com.soft.quality.if_yes_if_no_teste.dtos;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.soft.quality.if_yes_if_no_teste.domais.Historia;
 
 public class HistoriaDTO implements Serializable {
@@ -9,6 +13,9 @@ public class HistoriaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+	@NotEmpty(message = "O campo Título é Obrigatório ")
+	@Length(message = "O campo deve ter entre 3 e 20 caracteres.")
 	private String titulo;
 
 	public HistoriaDTO() {
